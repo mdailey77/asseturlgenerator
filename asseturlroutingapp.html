@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html ng-app="RoutingApp">
+	<head>
+		<title>Asset URL Generator</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="robots" content="noindex,nofollow" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<style>
+			body {
+			  padding-top: 50px;
+			}
+			h1 {
+				color: #003399;
+			}
+			.mediumspace {
+				margin-top: 5%;
+			}
+			.largespace {
+				margin-top: 10%;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>		
+		<script>
+			var myApp = angular.module("RoutingApp", []);
+			myApp.controller("LoadDataCtrl", function($scope){
+				$scope.productpage = [
+					{name: "World Wide - US", id: "productpageUS"},
+					{name: "Brazil", id: "productpageBR"},
+					{name: "France", id: "productpageFR"},
+					{name: "Latin America", id: "productpageLA"},
+					{name: "China", id: "productpageCN"},
+					{name: "Japan", id: "productpageJP"}										
+				];
+				$scope.section = [
+					{name: "About", id: "about", category: "ww-and-localized"},
+					{name: "Online Cloud Storage", id: "online-cloud-storage", category: "ww-and-localized"},
+					{name: "Fast Servers", id: "fast-servers", category: "ww-and-localized"},
+					{name: "Open Source Development", id: "open-source-development", category: "ww-and-localized"},
+					{name: "Business Services", id: "business-services", category: "ww-and-localized"},
+					{name: "Commerical Services", id: "commerical-services", category: "ww-and-localized"},
+					{name: "Consumer Analytics", id: "consumer-analytics", category: "ww-and-localized"}					
+				];				
+				$scope.asset = [
+					{name: "Product Asset 1", id: "productasset-1", category: "ww-and-localized"},
+					{name: "Product Asset 2", id: "productasset-2", category: "ww-and-localized"},
+					{name: "Product Asset 3", id: "productasset-3", category: "ww-and-localized"},
+					{name: "Product Asset 4", id: "productasset-4", category: "ww-and-localized"},
+					{name: "Product Asset 5", id: "productasset-5", category: "ww-and-localized"},
+					{name: "Product Asset 6", id: "productasset-6", category: "ww-and-localized"},
+					{name: "Product Asset 7", id: "productasset-7", category: "ww-and-localized"},
+					{name: "Product Asset 8", id: "productasset-8", category: "ww-and-localized"},
+					{name: "Product Asset 9", id: "productasset-9", category: "ww-and-localized"},
+					{name: "Product Asset 10", id: "productasset-10", category: "ww-and-localized"},
+					{name: "Product Asset 11", id: "productasset-11", category: "ww-and-localized"},
+					{name: "Product Asset 12", id: "productasset-12", category: "ww-and-localized"},
+					{name: "Product Asset 13", id: "productasset-13", category: "ww-and-localized"},
+					{name: "Product Asset 14", id: "productasset-14", category: "ww-and-localized"},
+					{name: "Product Asset 15", id: "productasset-15", category: "ww-and-localized"}					
+				];
+				$scope.generateUrl = function(){
+				   var linkstring = 'http://www.test.com/' + $scope.productpageValue.id + '?section=' + $scope.sectionValue.id + '&asset=' + $scope.assetValue.id;				  
+				   $('#asseturl').val(linkstring);      
+				};
+				$scope.localizedItems = function(item) {
+					if (angular.isDefined($scope.productpageValue)) {
+						if ($scope.productpageValue.name != 'World Wide - US') {
+							return item.category == 'ww-and-localized' || item.category == 'localized-only';
+						} else {
+							return item.category == 'ww-and-localized' || item.category == 'ww-only';
+						}
+					}
+				}
+				$scope.sectionassetMatch = function(item) {
+					if (angular.isDefined($scope.sectionValue)) {
+						if ($scope.sectionValue.id != 'World Wide - US') {
+							return item.category == 'ww-and-localized' || item.category == 'localized-only';
+						} else {
+							return item.category == 'ww-and-localized' || item.category == 'ww-only';
+						}
+					}
+				}
+			});
+		</script>
+		<script type="text/javascript">
+		// Google Analytic tracking script
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-32508232-1', 'auto');
+			  ga('send', 'pageview');
+		// End of Google Analytic tracking script
+		</script>
+	</head>
+	<body>		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<h1>Asset URL Generator</h1>
+					<p class="lead">A demo version of an asset url generator I developed using AngularJS. The idea for this AngularJS app came from coming up with a faster way to create custom URLs with query strings for a work client's product page. 
+					The dropdown menu values can easily be customized by changing the model data inside the controller. To prevent errors, all three dropdown menus must be selected in order for the 'Generate URL' button to be active.</p>
+				</div>
+			</div>
+			<div class="mediumspace row">
+				<div class="col-md-8">
+					<div ng-controller="LoadDataCtrl">
+						<form class="form-horizontal" name="asseturlgenerator" novalidate>
+							<div class="form-group">
+								<label class="col-md-4 control-label">product page</label>
+								<div class="col-md-8">
+									<select class="form-control" ng-model="productpageValue" ng-options="item.name for item in productpage" required>
+										<option value="">(Select one)</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label">section</label>
+								<div class="col-md-8">
+									<select class="form-control" ng-model="sectionValue" ng-disabled="!productpageValue" ng-options="item.name for item in section | filter:localizedItems" required>
+										<option value="">(Select one)</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label">asset</label>
+								<div class="col-md-8">
+									<select class="form-control" ng-model="assetValue" ng-disabled="!sectionValue" ng-options="item.name for item in asset | filter:sectionassetMatch" required>
+										<option value="">(Select one)</option>
+									</select>
+								</div>
+							</div>							
+							<div class="largespace col-md-12">
+								<div class="input-group">
+								  <span class="input-group-btn">
+									<button ng-click="generateUrl()" ng-disabled="asseturlgenerator.$invalid" class="btn btn-primary" type="button">Generate URL</button>
+								  </span>
+								  <input type="text" id="asseturl" class="form-control" placeholder="">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
